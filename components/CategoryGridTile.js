@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Text, Pressable, StyleSheet, Platform } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation } from "@react-navigation/native";
 
 
 export default function CategoryGridTile({ title, color, onPress }) {
   
-  const navigation = useNavigation()
+  // const navigation = useNavigation()
 
   return (
     <View  style={[styles.gridItem]}>

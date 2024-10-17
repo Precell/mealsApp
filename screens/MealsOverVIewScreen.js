@@ -2,37 +2,42 @@ import React from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import { MEALS } from "../data/dummy-data";
 
-import { useRoute } from "@react-navigation/native";
+// import { useRoute } from "@react-navigation/native";
 import MealItem from "../components/MealItem";
 
-
 export default function MealsOverVIewScreen({ route }) {
-//    const route = useRoute()
-//    route.params.categoryId
+  //    const route = useRoute()
+  //    route.params.categoryId
 
-    const catId = route.params.categoryId
+  const catId = route?.params?.categoryId;
 
-    const displayedMeals = MEALS.filter((mealItem) =>{
-        return mealItem.categoryIds.indexOf(catId) >= 0
-    })
+  const displayedMeals = MEALS.filter((mealItem) => {
+    return mealItem.categoryIds.indexOf(catId) >= 0;
+  });
 
+  console.log(displayedMeals);
+  
+  function renderMealItem(itemData) {
+    const item = itemData.item;
 
-    function renderMealItem(itemData) {
-        const item = itemData.item
-        
-        const mealItemProps ={
-            title: item.title,
-            imageUrl: item.imageUrl,
-            duration: item.duration,
-            complexity: item.complexity,
-            affordability: item.affordability
-        }
+    // const mealItemProps = {
+    //   title: item.title,
+    //   imageUrl: item.imageUrl,
+    //   duration: item.duration,
+    //   complexity: item.complexity,
+    //   affordability: item.affordability,
+    // };
 
-        return <MealItem {...mealItemProps}/>
-    }
+    // return <MealItem {...mealItemProps} />;
+    return <MealItem/>;
+  }
   return (
     <View style={styles.container}>
-      <FlatList data={displayedMeals} keyExtractor={(item) => item.id} renderItem={renderMealItem}/>
+      <FlatList
+        data={displayedMeals}
+        keyExtractor={(item) => item.id}
+        renderItem={renderMealItem}
+      />
     </View>
   );
 }

@@ -5,12 +5,13 @@ import CategoryGridTile from "../components/CategoryGridTile";
 function CategoriesScreen({ navigation }) {
 
   function renderCategoryItem(itemData) {
+
     function pressHandler() {
       navigation.navigate("MealsOverviewScreen", {
         categoryId:itemData.item.id,
       });
-    }
 
+    }
     return (
       <CategoryGridTile
         title={itemData.item.title}
@@ -19,7 +20,6 @@ function CategoriesScreen({ navigation }) {
       />
     );
   }
-
   return (
     <FlatList
       data={CATEGORIES}
