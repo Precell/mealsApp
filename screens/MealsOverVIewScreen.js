@@ -15,21 +15,20 @@ export default function MealsOverVIewScreen({ route }) {
     return mealItem.categoryIds.indexOf(catId) >= 0;
   });
 
-  console.log(displayedMeals);
   
   function renderMealItem(itemData) {
     const item = itemData.item;
 
-    // const mealItemProps = {
-    //   title: item.title,
-    //   imageUrl: item.imageUrl,
-    //   duration: item.duration,
-    //   complexity: item.complexity,
-    //   affordability: item.affordability,
-    // };
+    const mealItemProps = {
+      title: item.title,
+      imageUrl: item.imageUrl,
+      duration: item.duration,
+      complexity: item.complexity,
+      affordability: item.affordability,
+    };
 
-    // return <MealItem {...mealItemProps} />;
-    return <MealItem/>;
+    return <MealItem {...mealItemProps} />;
+    
   }
   return (
     <View style={styles.container}>
