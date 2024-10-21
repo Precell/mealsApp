@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text } from "react-native";
+import { Button, StyleSheet, Text } from "react-native";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import MealsOverViewScreen from "./screens/MealsOverViewScreen";
 import { NavigationContainer } from "@react-navigation/native";
@@ -38,11 +38,16 @@ export default function App() {
             // }}
           />
 
-          <Stack.Screen name="MealDetailScreen" component={MealDetailScreen} options={{
-            headerRight:() =>{
-              return <Text>Element in the header</Text>
-            }
-          }}/>
+          <Stack.Screen
+            name="MealDetailScreen"
+            component={MealDetailScreen}
+            // ADDING ELEMENT IN THE HEADER OUTSIDE THE SCREEN
+            // options={{
+            //   headerRight: () => {
+            //     return <Button title="Press Me" />;
+            //   },
+            // }}
+          />
         </Stack.Navigator>
         {/* <CategoriesScreen /> */}
       </NavigationContainer>

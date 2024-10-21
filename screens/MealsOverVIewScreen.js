@@ -43,6 +43,7 @@ export default function MealsOverVIewScreen({ route, navigation }) {
   }
   return (
     <View style={styles.container}>
+      {/* {tiling} */}
       <FlatList
         data={displayedMeals}
         keyExtractor={(item) => item.id}
