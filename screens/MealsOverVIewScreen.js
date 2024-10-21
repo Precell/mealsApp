@@ -1,11 +1,11 @@
-import React from "react";
+import React, {useLayoutEffect} from "react";
 import { View, FlatList, StyleSheet } from "react-native";
-import { MEALS } from "../data/dummy-data";
+import { MEALS, CATEGORIES } from "../data/dummy-data";
 
 // import { useRoute } from "@react-navigation/native";
 import MealItem from "../components/MealItem";
 
-export default function MealsOverVIewScreen({ route }) {
+export default function MealsOverVIewScreen({ route, navigation }) {
   //    const route = useRoute()
   //    route.params.categoryId
 
@@ -14,6 +14,16 @@ export default function MealsOverVIewScreen({ route }) {
   const displayedMeals = MEALS.filter((mealItem) => {
     return mealItem.categoryIds.indexOf(catId) >= 0;
   });
+
+
+
+  useLayoutEffect(()=>
+    {
+      const categoryTitle = CATEGORIES.find(category => category.id === catId).title
+      navigation.setOptions({
+        title: categoryTitle
+      })
+    },[catId, navigation])
 
   
   function renderMealItem(itemData) {
