@@ -19,8 +19,11 @@ const MealDetailScreen = ({route}) => {
         <MealDetailScreen duration={selectedMeal.duration} complexity={selectedMeal.complexity} affordability={selectedMeal.affordability}/>
         
         <Text>Ingredients</Text>
-        
-        <Text>Steps</Text>
+        {selectedMeal.ingredients.map((ingredient) =><Text key={ingredient}>{ingredient}</Text>)}
+        <Text>
+
+        {selectedMeal.steps.map((step) =><Text key={step}>{step}</Text>)}
+        </Text>
       </Text>
     </View>
   )
