@@ -4,9 +4,20 @@ import CategoriesScreen from "./screens/CategoriesScreen";
 import MealsOverViewScreen from "./screens/MealsOverViewScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from '@react-navigation/drawer'
+
 import MealDetailScreen from "./screens/MealDetailScreen";
+import FavoritesScreen from "./screens/FavoritesScreen";
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator()
+
+function DrawerNavigation(params) {
+  return <Drawer.Navigator>
+    <Drawer.Screen name="categories" component={CategoriesScreen}/>
+    <Drawer.Screen name="favorites" component={FavoritesScreen}/>
+  </Drawer.Navigator>
+}
 
 export default function App() {
   return (
@@ -24,18 +35,14 @@ export default function App() {
         >
           <Stack.Screen
             name="CategoriesScreen"
-            component={CategoriesScreen}
-            options={{ title: "Meals Category" }}
+            component={DrawerNavigation}
+            options={{
+              headerShown:false
+            }}
           />
           <Stack.Screen
             name="MealsOverviewScreen"
             component={MealsOverViewScreen}
-            // options={({route, navigation}) =>{
-            //   const catId = route.params.categoryId
-            //   return {
-            //     title: catId
-            //   }
-            // }}
           />
 
           <Stack.Screen
