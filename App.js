@@ -4,19 +4,43 @@ import CategoriesScreen from "./screens/CategoriesScreen";
 import MealsOverViewScreen from "./screens/MealsOverViewScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createDrawerNavigator } from '@react-navigation/drawer'
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import MealDetailScreen from "./screens/MealDetailScreen";
 import FavoritesScreen from "./screens/FavoritesScreen";
 
+import { Ionicons } from "@expo/vector-icons";
+
 const Stack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator()
+const Drawer = createDrawerNavigator();
+
+
 
 function DrawerNavigation(params) {
-  return <Drawer.Navigator>
-    <Drawer.Screen name="categories" component={CategoriesScreen}/>
-    <Drawer.Screen name="favorites" component={FavoritesScreen}/>
-  </Drawer.Navigator>
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: "#351401" },
+        headerTintColor: "#fff",
+        sceneContainerStyle: {
+          backgroundColor: "#3f2f25",
+        },
+        drawerContentStyle:{backgroundColor:"#351401"},
+        drawerInactiveTintColor:'white',
+        drawerActiveTintColor:"#351401",
+        drawerActiveBackgroundColor:"#e4baa1"
+      }}
+    >
+      <Drawer.Screen name="categories" component={CategoriesScreen} options={{
+        title:'All Categories',
+        drawerIcon:({ color, size }) => <Ionicons color={color} size={size} name="list"/>
+      }}/>
+      <Drawer.Screen name="favorites" component={FavoritesScreen}  options={{
+        drawerIcon:({ color, size }) => <Ionicons color={color} size={size} name="star"/>
+
+      }}/>
+    </Drawer.Navigator>
+  );
 }
 
 export default function App() {
@@ -37,7 +61,7 @@ export default function App() {
             name="CategoriesScreen"
             component={DrawerNavigation}
             options={{
-              headerShown:false
+              headerShown: false,
             }}
           />
           <Stack.Screen
