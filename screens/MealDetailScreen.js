@@ -1,5 +1,5 @@
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
-import React  from "react";
+import React, { useContext } from "react";
 import { MEALS } from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
 import Subtitle from "../components/MealDetail/Subtitle";
@@ -7,27 +7,38 @@ import List from "../components/MealDetail/List";
 import { useLayoutEffect } from "react";
 import IconButton from "../components/IconButton";
 
-const MealDetailScreen = ({ route, navigation }) => {
-  const mealId = route?.params?.mealId;
+import { FavoritesContext } from "../store/context/favorites-context";
 
+const MealDetailScreen = ({ route, navigation }) => {
+  const favoriteMealsCtx = useContext(FavoritesContext);
+
+  const mealId = route?.params?.mealId;
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
-  function headerButtonPressHandler(params) {
+  const mealIsFavorite = favoriteMealsCtx.ids.includes(mealId);
+
+  function changeFavoriteStatusHandler(params) {
     console.log("pressed");
-    // navigation.navigate("MealsOverviewScreen")
-    
+    if (mealIsFavorite) {
+      favoriteMealsCtx.removeFavorite(mealId)
+    }else{
+      favoriteMealsCtx.addFavorite(mealId)
+    }
   }
 
-  useLayoutEffect(() =>{
+  useLayoutEffect(() => {
     navigation.setOptions({
-        headerRight:() =>{
-            return <IconButton icon='star' color='white' onPress={headerButtonPressHandler}/>
-        }
-    })
-  },[navigation, headerButtonPressHandler])
-
-
-
+      headerRight: () => {
+        return (
+          <IconButton
+            icon={mealIsFavorite ? 'star' : 'star-outline'}
+            color="white"
+            onPress={changeFavoriteStatusHandler}
+          />
+        );
+      },
+    });
+  }, [navigation, changeFavoriteStatusHandler]);
 
   return (
     <ScrollView style={styles.rootContainer}>
@@ -60,9 +71,9 @@ const MealDetailScreen = ({ route, navigation }) => {
 export default MealDetailScreen;
 
 const styles = StyleSheet.create({
-    rootContainer:{
-        marginBottom:32
-    },
+  rootContainer: {
+    marginBottom: 32,
+  },
   image: {
     width: "100%",
     height: 350,
@@ -77,8 +88,8 @@ const styles = StyleSheet.create({
   detailText: {
     color: "#3f2f25",
   },
-  listOuterContainer:{
-alignItems:"center"
+  listOuterContainer: {
+    alignItems: "center",
   },
   listContainer: {
     width: "80%",
