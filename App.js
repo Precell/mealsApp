@@ -49,11 +49,11 @@ export default function App() {
             name="MealDetailScreen"
             component={MealDetailScreen}
             // ADDING ELEMENT IN THE HEADER OUTSIDE THE SCREEN
-            // options={{
-            //   headerRight: () => {
-            //     return <Button title="Press Me" />;
-            //   },
-            // }}
+            options={{
+              headerRight: () => {
+                return <Button title="Press Me" />;
+              },
+            }}
           />
         </Stack.Navigator>
         {/* <CategoriesScreen /> */}
